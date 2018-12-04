@@ -9,7 +9,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
     path('who_am_i/',views.who_am_i),
-    path('patients/', include('patients.urls'))
+    path('patients/', include('patients.urls')),
+    path('brain_tumour/', include('brain_tumour.urls')),
 ]
 
 if settings.DEBUG:
