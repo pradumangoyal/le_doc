@@ -17,7 +17,12 @@ class SkinCancer(models.Model):
     uploaded = models.FileField(upload_to=user_directory_path_orignal)
     clustered = models.FileField(upload_to=user_directory_path_clustered, blank=True)
     melanoma = models.CharField(max_length=7, blank=True)
-    bengin = models.CharField(max_length=7, blank=True)
+    vascular = models.CharField(max_length=7, blank=True)
+    nevus = models.CharField(max_length=7, blank=True)
+    dermatofibroma = models.CharField(max_length=7, blank=True)
+    bowen = models.CharField(max_length=7, blank=True)
+    keratoses = models.CharField(max_length=7, blank=True)
+    carcinoma = models.CharField(max_length=7, blank=True)
 
     def __str__(self):
         return self.patient.username + 'skin_cancer'
