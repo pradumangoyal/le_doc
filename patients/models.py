@@ -10,7 +10,7 @@ class Patient(models.Model):
         ('N', 'Not Disclosed'),
     )
     created = models.DateTimeField(auto_now_add=True)
-    doctor  = models.ForeignKey(User, on_delete=models.CASCADE)
+    doctor  = models.ForeignKey(User, on_delete=models.CASCADE, related_name='patients')
     username = models.CharField(max_length=31, unique=True)
     name = models.CharField(max_length=63)
     age = models.CharField(max_length=7)
