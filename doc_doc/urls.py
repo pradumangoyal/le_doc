@@ -13,6 +13,7 @@ urlpatterns = [
     path('patients/', include('patients.urls')),
     path('brain_tumour/', include('brain_tumour.urls')),
     path('brain_stroke/', include('brain_stroke.urls')),
+    path('skin_cancer/', include('skin_cancer.urls')),
 ]
 
 if settings.DEBUG:
