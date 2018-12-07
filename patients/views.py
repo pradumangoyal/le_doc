@@ -14,10 +14,7 @@ def username_available(request):
     if not 'username' in request.GET:
         return Response(data = {'available': False}, status=status.HTTP_200_OK)
     else:
-        print('here')
         if not Patient.objects.filter(username=request.GET['username']):
-            print('here'+request.GET['username'])
-            print(Patient.objects.filter(username=request.GET['username']))
             return Response(data = {'available': True}, status=status.HTTP_200_OK)
         else:
             return Response(data = {'available': False}, status=status.HTTP_200_OK)
