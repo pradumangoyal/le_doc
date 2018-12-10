@@ -13,10 +13,11 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import datasets, transforms, models
-
 import numpy as np
 import cv2
 # Create your views here.
+
+#For finding the minimum value of the passed array
 def min_index(array):
     min=0
     for i in range(1,len(array)):
