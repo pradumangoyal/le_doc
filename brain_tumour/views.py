@@ -116,7 +116,7 @@ def operate(request):
                 #Applying power transform and also smoothening
                 kernel = np.ones((5,5),np.float32)/25
                 image_t1c = cv2.filter2D(image_t1c,-1,kernel)
-                image_t1c = adjust_gamma(image_t1c, 0.55)
+                # image_t1c = adjust_gamma(image_t1c, 0.55)
                 image_flair = cv2.filter2D(image_flair,-1,kernel)
                 image_flair = adjust_gamma(image_flair, 0.55)
                 
@@ -169,8 +169,8 @@ def operate(request):
                     centroid_flair[0] = cent0.mean()
                     centroid_flair[1] = cent1.mean()
                     centroid_flair[2] = cent2.mean()
-                # if(centroid_flair[2] < 172):
-                #     centroid_flair[2] = 172    
+                if(centroid_flair[2] < 180):
+                    centroid_flair[2] = 180    
                 #As the last iteration updation does not take place in the loop
                 for i in range(0,image_new_flair.shape[1]):
                     for j in range(0,3):
@@ -197,6 +197,33 @@ def operate(request):
                             brain_image[i, j, 2] = 0
                 
                 cv2.imwrite(intermediate_picture, brain_image)
+
+                #Now finding out the percentage of region affected tumor
+                count_total = 0
+                count_t1c = 0
+                count_flair = 0
+                sub = 0         #This would be the fully black area in the image so needs to be subtracted
+                for i in range(brain_image.shape[0]):
+                    for j in range(brain_image.shape[1]):
+                        if(brain_image[i, j, 0]==0 and brain_image[i, j, 1]==0 and brain_image[i, j, 2]==255):
+                            count_t1c += 1
+                            count_flair += 1
+                        elif(brain_image[i, j, 0]==0 and brain_image[i, j, 1]==255 and brain_image[i, j, 2]==0):
+                            count_flair += 1
+                        if(brain_image[i, j, 0]==0 and brain_image[i, j , 1]==0 and brain_image[i, j, 2]==0):
+                            sub += 1
+                        count_total += 1
+                count_total -= sub
+                percent_t1c = (count_t1c/count_total)*100    #These variables store the percent of the brain affected
+                percent_flair = (count_flair/count_total)*100
+
+                if(percent_t1c > 2.3):
+                    state = 'HGG'
+                else:
+                    state = 'LGG'
+
+                obj.stage = str(round(percent_t1c, 2))+','+str(round(percent_flair, 2))+','+state
+
                 file = open(intermediate_picture, 'rb')
                 obj.clustered.save(os.path.basename(obj.uploaded.file.name[:-3] + 'jpg'), File(file))
                 os.remove(intermediate_picture)
