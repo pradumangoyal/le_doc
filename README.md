@@ -1,7 +1,7 @@
 <h1> LeDoc </h1>
 
 <h3> 1. Introduction </h3>
-<img src='images/home.png' align='center' height=600px width=600px>
+<img src='images/home.png' style="max-width:100%;">
 <p> The basic use case of this app is in the field of medical image analysis. With the help of various advances in the field of deep learning we wish to assist in the medical field.<br> Right now we are able to tackle some of the fatal diseases like Skin Cancer, Brain Tumor and Brain Cancer. Through our app, we wish to assist doctors in the preliminary stages of treatment of these diseases. For this, we use clustering for segmentation purposes, and for predicting the severity of the disease we use various computer vision techniques.</p>
 
 <h3> 2. Motivation </h3>
@@ -9,7 +9,7 @@
     
 <h3> 3. Methodology</h3>
 <h5> A. Skin Cancer </h5>
-<p>The whole dataset for this was obtained from <a href='https://challenge2018.isic-archive.com/'>ISIC challenge 2018</a>.<br>For this task, we ask the user to input a <i>224*224</i> skin lesion image. For the segmentation purposes we used simple K-Means clustering techniques(<i>k=2</i>). The classification of the skin lesions was on these 7 categories:<i> Melanoma, Melanocytic Nevus, Basal Cell Carcinoma, Acinic Keratosis, Benign Keratosis, Dermatofibroma, Vascular Lesion.</i> More information regarding these types can be collected from <a href='https://challenge2018.isic-archive.com/task3/'>here</a> <br> The classification into these 7 categories was done by training a ConvNet. For training we used a pretrained VGG_16 network and used transfer learning by removing all the fully connected layers and then attaching our own 5 fc layers and then training accordingly on the dataset. The whole ConvNet model is made using <i>Pytorch</i> </p>
+<p>The whole dataset for this was obtained from <a href='https://challenge2018.isic-archive.com/'>ISIC challenge 2018</a>.<br>For this task, we ask the user to input a <i>224*224</i> skin lesion image. For the segmentation purposes we used simple K-Means clustering techniques(<i>k=2</i>). The classification of the skin lesions was on these 7 categories:<i> Melanoma, Melanocytic Nevus, Basal Cell Carcinoma, Acinic Keratosis, Benign Keratosis, Dermatofibroma, Vascular Lesion.</i> More information regarding these types can be collected from <a href='https://challenge2018.isic-archive.com/task3/'>here</a> <br> The classification into these 7 categories was done by training a ConvNet. For training we used a pretrained VGG_16 network and used transfer learning by removing all the fully connected layers and then attaching our own 5 fc layers and then training accordingly on the dataset. The whole ConvNet model is made using <i>Pytorch</i>. </p>
 <h5> B. Brain Tumor </h5>
 <p>The whole dataset for this was obtained from <a href='http://www.isles-challenge.org/ISLES2015/'>ISLES challenge 2015</a>. <br>For the processing of this task, the user is made to upload a <i>zip file cotaining two kinds of MRI scans, namely <b>t1c</b> and <b>flair</b></i>. These two different kinds of MRI sequences are basically essential to get different kind of information about the patient's brain state. For the segmentation purpose we used K-Means clustering techniques(<i>k=3</i>). We apply the clustering process on both the types of sequences separately and then combine them by using color coding.</p>
 <ul>
@@ -30,7 +30,10 @@
 <p>Clone both the repositories containing the backend and frontend for the app.<br>Opening a terminal session from the home directory.</p>
 
 ``
-cd le_doc_fronted
+cd le_doc_fronted  
+``
+
+``
 npm start
 ``
 
@@ -38,8 +41,17 @@ npm start
 
 ``
 cd le_doc
-source .env/bin/activate
-pip install -r requirements.txt
+``
+
+``
+source .env/bin/activate  
+``
+
+``
+pip install -r requirements.txt  
+``
+
+``
 python manage.py runserver
 ``
 
@@ -49,13 +61,13 @@ python manage.py runserver
 <h3> 5. Results </h3>
 <h5> A. Skin Cancer </h5>
 <p> Through our techniques for segmentation we were able to achieve a Jaccard index of about 0.78, averaged on a dataset of 100 images. Also the top-3 accuracy of our classification model is of about 85%.</p>
-<img src='images/skin_cancer.png' align='center' height=600px width=600px>
+<img src='images/skin_cancer.png' style="max-width:100%;">
 <h5> B. Brain Tumor </h5>
 <p> Through our techniques for segmentation we were able to achieve a Jaccard index of about 0.75, averaged on a dataset of 100 zip files.</p>
-<img src='images/brain_tumor.png' align='center' height=600px width=600px>
+<img src='images/brain_tumor.png' style="max-width:100%;">
 <h5> C. Brain Stroke </h5>
 <p> Through our techniques for segmentation we were able to achieve a Jaccard index of about 0.75, averaged on a dataset of 100 zip files.</p>
-<img src='images/brain_stroke.png' align='center' height=600px width=600px>
+<img src='images/brain_stroke.png' style="max-width:100%;">
 
 <h3> 6. Further development of the project </h3>
 <ol>
